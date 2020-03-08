@@ -57,7 +57,9 @@ import org.springframework.util.Assert;
 public class AnnotationConfigApplicationContext extends GenericApplicationContext implements AnnotationConfigRegistry {
 	/**
 	 * reader这个类顾名思义是一个reader（读取器）
-	 * 读取什么呢？顾名思义AnnotatedBeanDefinition的意思是读取一个被加了注解的bean
+	 * 读取什么呢？顾名思义AnnotatedBeanDefinition的意思是读取一个被加了注解的bean，然后生成这个bean的BeanDefinition
+	 *
+	 * 也就是说bean的BeanDefinition是通过reader来生成的
 	 *
 	 * reader这个类在构造方法中实例化
 	 */

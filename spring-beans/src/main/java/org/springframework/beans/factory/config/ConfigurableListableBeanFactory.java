@@ -138,6 +138,8 @@ public interface ConfigurableListableBeanFactory
 	 * Freeze all bean definitions, signalling that the registered bean definitions
 	 * will not be modified or post-processed any further.
 	 * <p>This allows the factory to aggressively cache bean definition metadata.
+	 *
+	 * 冻结所有bean定义，表示注册的bean定义将不再修改或后期处理。这允许工厂主动缓存bean定义元数据。
 	 */
 	void freezeConfiguration();
 

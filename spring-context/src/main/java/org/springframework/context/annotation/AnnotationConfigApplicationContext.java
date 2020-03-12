@@ -53,6 +53,8 @@ import org.springframework.util.Assert;
  *
  * 我们在使用AnnotationConfigApplicationContext构造方法来创建AnnotationConfigApplicationContext对象的时候，我们知道执行子类构造方法之前会先调用父类的构造方法
  * 也就是会先调用GenericApplicationContext这个类的构造方法来创建DefaultListableBeanFactory，这个其实就是我们的springean工厂
+ *
+ * AnnotationConfigApplicationContext也是实现了AnnotationConfigRegistry这个Registry接口
  */
 public class AnnotationConfigApplicationContext extends GenericApplicationContext implements AnnotationConfigRegistry {
 	/**
@@ -92,12 +94,18 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		 * Annotated：被注解的
 		 * AnnotatedBean：被加了注解的bean
 		 *
+		 * 实例化的时候传入的是一个this，这个this表示的当前类AnnotationConfigApplicationContext，也就是spring的配置环境
 		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
 
 		/**
 		 * reader是用来读取BeanDefinition（bean的定义）的
 		 * scanner是用来做扫描的
+		 *
+		 * 可以用来扫描包或类，进而转换成bd
+		 * 但实际上我们扫描包的工作不是scanner这个类完成的
+		 * 是spring自己在AnnotatedBeanDefinitionReader构造方法中new了一个ClassPathBeanDefinitionScanner
+		 * 这里的scanner仅仅是为了给程序员能够在外部调用AnnotationConfigApplicationContext对象的scan方法
 		 */
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
